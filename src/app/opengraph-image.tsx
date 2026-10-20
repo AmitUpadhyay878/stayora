@@ -7,6 +7,6 @@ export const contentType = ogContentType;
 export default function Image() {
   return ogImage({
     title: "Four brands. Twelve addresses.",
-    subtitle: "Eco Inn, Inn, Plaza, and Resort across India. Request to book — no payment on this site.",
+    subtitle: "Eco Inn, Inn, Plaza, and Resort across India. Book as a guest with a 20% deposit.",
   });
 }

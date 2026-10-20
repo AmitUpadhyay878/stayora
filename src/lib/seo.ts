@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_NAME = "Stayora";
 export const SITE_TAGLINE = "Four brands. Twelve addresses.";
 export const SITE_DESCRIPTION =
-  "Stayora is a family of four hotel brands across India — Eco Inn, Inn, Plaza, and Resort. Browse twelve properties, compare rooms, and request to book. No payment on this site.";
+  "Stayora is a family of four hotel brands across India — Eco Inn, Inn, Plaza, and Resort. Browse twelve properties, compare rooms, and book as a guest with a 20% deposit. The balance is settled at the hotel on checkout.";
 export const SITE_KEYWORDS = [
   "Stayora",
   "Stayora hotels",

@@ -97,7 +97,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ prope
               <span className="text-sm font-normal text-muted-foreground"> / night</span>
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Request to book. Our team confirms availability. No payment on this site.
+              Book as a guest or member. Pay a 20% deposit now; the balance at the hotel on checkout.
             </p>
             <Link href={`/book/${hotel.slug}`} className={`${buttonVariants({ size: "lg" })} mt-5 w-full`}>
               Book Now

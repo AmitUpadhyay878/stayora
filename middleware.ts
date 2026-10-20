@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
-const PROTECTED = [/^\/wishlist(?:\/|$)/, /^\/bookings(?:\/|$)/, /^\/book(?:\/|$)/, /^\/account(?:\/|$)/];
+const PROTECTED = [/^\/wishlist(?:\/|$)/, /^\/bookings(?:\/|$)/, /^\/account(?:\/|$)/];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/wishlist/:path*", "/bookings/:path*", "/book/:path*", "/account/:path*"],
+  matcher: ["/wishlist/:path*", "/bookings/:path*", "/account/:path*"],
 };

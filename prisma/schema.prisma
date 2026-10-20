@@ -15,7 +15,16 @@ enum BrandTier {
 }
 
 enum BookingStatus {
-  pending
+  pending_payment
+  confirmed
+  cancelled
+}
+
+enum PaymentStatus {
+  unpaid
+  deposit_paid
+  paid
+  failed
 }
 
 model Brand {
@@ -209,26 +218,38 @@ model WishlistItem {
 }
 
 model BookingRequest {
-  id        String        @id @default(cuid())
-  userId    String
-  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  hotelId   String
-  hotel     Hotel         @relation(fields: [hotelId], references: [id], onDelete: Cascade)
-  firstName String
-  lastName  String
-  email     String
-  checkIn   DateTime
-  checkOut  DateTime
-  guests    Int
+  id              String        @id @default(cuid())
+  reference       String        @unique
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guest           Boolean       @default(true)
+  hotelId         String
+  hotel           Hotel         @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  firstName       String
+  lastName        String
+  email           String
+  phone           String?
+  checkIn         DateTime
+  checkOut        DateTime
+  guests          Int
   rooms           Int           @default(1)
   adults          Int           @default(1)
   children        Int           @default(0)
   roomPreference  String?
   extras          String[]      @default([])
   message         String?
-  status    BookingStatus @default(pending)
-  createdAt DateTime      @default(now())
+  totalAmount     Int           @default(0)
+  depositAmount   Int           @default(0)
+  balanceAmount   Int           @default(0)
+  currency        String        @default("INR")
+  status          BookingStatus @default(pending_payment)
+  paymentStatus   PaymentStatus @default(unpaid)
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
 
   @@index([userId])
   @@index([hotelId])
+  @@index([email])
 }

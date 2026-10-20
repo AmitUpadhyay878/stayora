@@ -51,9 +51,8 @@ export default async function AboutPage() {
       <div className="mt-12 rounded-2xl bg-muted p-8">
         <h2 className="text-xl font-semibold">Booking with Stayora</h2>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Sign in, send a booking request for the property and dates you want, and our team confirms
-          availability. There is no payment on this site — it is a request, not a lock, so overlapping
-          requests are fine.
+          Book as a guest without an account, or sign in as a member to keep a wishlist and track every stay. Pay a
+          20% deposit online to reserve and settle the remaining 80% at the hotel when you check out.
         </p>
         <Link href="/hotels" className={`${buttonVariants()} mt-6`}>
           Browse our hotels

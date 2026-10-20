@@ -21,6 +21,7 @@ export const bookingSchema = z
     firstName: z.string().min(1, "First name is required"),
     lastName: z.string().min(1, "Last name is required"),
     email: z.string().email("Enter a valid email"),
+    phone: z.string().max(20).optional(),
     checkIn: z.string().min(1, "Check-in is required"),
     checkOut: z.string().min(1, "Check-out is required"),
     rooms: z.coerce.number().int().min(1).max(8),
@@ -45,6 +46,18 @@ export const bookingSchema = z
 
 export const wishlistSchema = z.object({
   hotelId: z.string().min(1),
+});
+
+export const bookingLookupSchema = z.object({
+  reference: z.string().min(4, "Enter your booking reference"),
+  email: z.string().email("Enter the email used for the booking"),
+});
+
+export const paymentVerifySchema = z.object({
+  bookingId: z.string().min(1),
+  razorpay_order_id: z.string().min(1),
+  razorpay_payment_id: z.string().min(1),
+  razorpay_signature: z.string().min(1),
 });
 
 export const authFormSchema = z.object({

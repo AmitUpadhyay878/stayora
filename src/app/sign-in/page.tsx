@@ -3,8 +3,8 @@ import { AuthForm } from "@/components/auth/auth-form";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Sign in",
-  description: "Sign in to your Stayora account to save hotels, manage requests, and book a stay.",
+  title: "Member sign in",
+  description: "Sign in to your Stayora membership to track bookings, sync your wishlist, and pay deposits faster.",
   path: "/sign-in",
 });
 
@@ -18,8 +18,11 @@ export default async function SignInPage({
 
   return (
     <div className="mx-auto max-w-md px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-semibold">Welcome back</h1>
-      <p className="mt-2 text-muted-foreground">Sign in to save stays and send booking requests.</p>
+      <h1 className="text-3xl font-semibold">Member sign in</h1>
+      <p className="mt-2 text-muted-foreground">
+        Members get a saved wishlist and a single place for every booking. Booking as a guest instead? You can reserve
+        without an account.
+      </p>
       <div className="mt-8 rounded-2xl bg-card p-6 shadow-sm">
         <AuthForm mode="sign-in" callbackUrl={callbackUrl} />
       </div>

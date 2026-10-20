@@ -34,7 +34,8 @@ export default async function HomePage() {
           faqJsonLd([
             {
               question: "Does Stayora take payment online?",
-              answer: "No. Guests send a booking request. The hotel confirms availability. No payment is collected on this site.",
+              answer:
+                "Guests can book without an account and pay a 20% deposit online to reserve. The remaining 80% is settled at the hotel when you check out. Members pay the same 20% deposit.",
             },
             {
               question: "How many Stayora hotels are there?",

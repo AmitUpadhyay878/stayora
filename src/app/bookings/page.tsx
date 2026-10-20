@@ -9,13 +9,32 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { extraLabel } from "@/lib/constants";
 import { formatCurrency, formatOccupancy } from "@/lib/utils";
 
+const PAYMENT_LABELS: Record<string, string> = {
+  unpaid: "Deposit pending",
+  deposit_paid: "Deposit paid",
+  paid: "Paid in full",
+  failed: "Payment failed",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  pending_payment: "Not confirmed",
+  confirmed: "Confirmed",
+  cancelled: "Cancelled",
+};
+
 export default function BookingsPage() {
   const { data, isLoading } = useBookings();
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       <h1 className="text-3xl font-semibold">Your requests</h1>
-      <p className="mt-2 text-muted-foreground">Booking requests saved to your account.</p>
+      <p className="mt-2 text-muted-foreground">
+        Booking requests saved to your member account. Booked as a guest?{" "}
+        <Link href="/book/manage" className="font-medium text-primary hover:underline">
+          Find it with your reference
+        </Link>
+        .
+      </p>
       <div className="mt-8 space-y-4">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-28" />)
@@ -33,9 +52,18 @@ export default function BookingsPage() {
                     {booking.roomPreference ? ` · ${booking.roomPreference}` : ""}
                     {booking.extras?.length ? ` · ${booking.extras.map(extraLabel).join(", ")}` : ""}
                   </p>
-                  <p className="mt-1 text-sm">{formatCurrency(booking.hotel.pricePerNight)} / night</p>
+                  <p className="mt-1 text-sm">
+                    {formatCurrency(booking.depositAmount)} deposit ·{" "}
+                    {formatCurrency(booking.balanceAmount)} at hotel
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">Ref {booking.reference}</p>
                 </div>
-                <Badge className="capitalize">{booking.status}</Badge>
+                <div className="flex flex-col items-end gap-2">
+                  <Badge className="capitalize">{STATUS_LABELS[booking.status] ?? booking.status}</Badge>
+                  <Badge variant="outline" className="capitalize">
+                    {PAYMENT_LABELS[booking.paymentStatus] ?? booking.paymentStatus}
+                  </Badge>
+                </div>
               </div>
               <Link
                 href={`/book/confirmation/${booking.id}`}

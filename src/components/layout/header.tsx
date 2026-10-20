@@ -218,7 +218,7 @@ export function Header({
             <span className="inline-flex h-10 w-28 animate-pulse rounded-full bg-muted" />
           ) : (
             <Link href="/sign-in" className={buttonVariants({ variant: "ghost", size: "sm" })}>
-              Sign in
+              Member sign in
             </Link>
           )}
           <Link href={bookHref} className={`${buttonVariants({ size: "sm" })} hidden sm:inline-flex`}>
@@ -300,7 +300,7 @@ export function Header({
               </>
             ) : (
               <Link href="/sign-in" className="rounded-xl px-3 py-3 text-sm font-medium hover:bg-muted" onClick={() => setOpen(false)}>
-                Sign in
+                Member sign in
               </Link>
             )}
             <Link href={bookHref} className={`${buttonVariants()} mt-2`} onClick={() => setOpen(false)}>

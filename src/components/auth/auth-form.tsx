@@ -89,7 +89,7 @@ export function AuthForm({
       <p className="text-center text-sm text-muted-foreground">
         {isSignUp ? (
           <>
-            Already have an account?{" "}
+            Already a member?{" "}
             <Link href={`/sign-in?callbackUrl=${encodeURIComponent(callbackUrl)}`} className="font-medium text-foreground hover:underline">
               Sign in
             </Link>
@@ -98,7 +98,7 @@ export function AuthForm({
           <>
             New to Stayora?{" "}
             <Link href={`/sign-up?callbackUrl=${encodeURIComponent(callbackUrl)}`} className="font-medium text-foreground hover:underline">
-              Create an account
+              Become a member
             </Link>
           </>
         )}

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { isReservedSlug } from "@/lib/brands";
 import { BookingForm } from "@/components/booking/booking-form";
-import { getSession } from "@/lib/session";
 import { hotelPageMeta } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -23,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     suffix: "Request to book",
     path: hotel ? `/book/${hotel.slug}` : "/hotels",
     description: hotel
-      ? `Request a stay at ${hotel.name} in ${hotel.city.name}. Tell us dates, occupancy, and room preference. No payment collected.`
+      ? `Request a stay at ${hotel.name} in ${hotel.city.name}. Tell us dates, occupancy, and room preference. Pay a 20% deposit now and the rest at checkout.`
       : undefined,
   });
 }
@@ -36,8 +35,6 @@ export default async function BookPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { slug } = await params;
-  const session = await getSession();
-  if (!session) redirect(`/sign-in?callbackUrl=/book/${slug}`);
   if (isReservedSlug(slug)) notFound();
 
   const query = await searchParams;
@@ -46,7 +43,7 @@ export default async function BookPage({
     include: {
       brand: true,
       city: true,
-      roomCategories: { orderBy: { sortOrder: "asc" }, select: { name: true, slug: true } },
+        roomCategories: { orderBy: { sortOrder: "asc" }, select: { name: true, slug: true, priceFrom: true } },
     },
   });
   if (!hotel) notFound();
@@ -64,12 +61,14 @@ export default async function BookPage({
       </p>
       <h1 className="mt-2 text-3xl font-semibold">Request {hotel.name}</h1>
       <p className="mt-2 text-muted-foreground">
-        Tell us who is staying. We will save a pending request — no payment collected.
+        Reserve as a guest — no account needed. Pay a 20% deposit now; the balance at the hotel when you check out.
       </p>
       <div className="mt-8 rounded-2xl bg-card p-6 shadow-sm">
         <BookingForm
           hotelId={hotel.id}
           hotelSlug={hotel.slug}
+          hotelName={hotel.name}
+          pricePerNight={hotel.pricePerNight}
           roomOptions={hotel.roomCategories}
           defaults={{
             checkIn: str(query.checkIn),

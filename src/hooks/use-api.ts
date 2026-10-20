@@ -129,9 +129,11 @@ export type WishlistDto = {
 
 export type BookingDto = {
   id: string;
+  reference: string;
   firstName: string;
   lastName: string;
   email: string;
+  phone?: string | null;
   checkIn: string;
   checkOut: string;
   guests: number;
@@ -140,6 +142,12 @@ export type BookingDto = {
   children: number;
   roomPreference?: string | null;
   extras?: string[];
+  totalAmount: number;
+  depositAmount: number;
+  balanceAmount: number;
+  currency: string;
+  guest: boolean;
+  paymentStatus: string;
   status: string;
   createdAt: string;
   hotel: PropertyCardDto;

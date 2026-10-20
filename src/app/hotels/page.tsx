@@ -11,7 +11,7 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Our hotels in India",
   description:
-    "Browse twelve Stayora properties across Eco Inn, Inn, Plaza, and Resort. Filter by brand, city, or guests, then request to book — no payment collected.",
+    "Browse twelve Stayora properties across Eco Inn, Inn, Plaza, and Resort. Filter by brand, city, or guests, then book as a guest with a 20% deposit — the rest at checkout.",
   path: "/hotels",
 });
 
